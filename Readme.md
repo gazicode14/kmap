@@ -1,0 +1,1 @@
+https://madformath.com/calculators/digital-systems/karnaugh-maps/karnaugh-map-solver-pos

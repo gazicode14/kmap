@@ -293,7 +293,8 @@ function kmapsolver(_0x292144) {
           , _0xaf6fb9 = []
           , _0x5af896 = [];
         for (var _0x49aeca = 0x0; _0x49aeca < truthsonucsayi[_0x1e26ab(0x105)]; _0x49aeca++) {
-            if (truthsonucsayi[_0x49aeca] == 0x0 || truthsonucsayi[_0x49aeca] == 0x2) {
+            // include minterms that are 1 (true) or 2 (don't-care) for SOP minimization
+            if (truthsonucsayi[_0x49aeca] == 0x1 || truthsonucsayi[_0x49aeca] == 0x2) {
                 var _0x407280 = toBinary(_0x49aeca, degiskenlistesi[_0x1e26ab(0x105)]);
                 _0x37308f[_0x1e26ab(0xb8)](_0x407280);
                 var _0x4f12d8 = 0x0;
@@ -450,7 +451,8 @@ function kmapsolver(_0x292144) {
         _0x3db6c1 = _0x246624,
         decimalsdcsiz = [];
         for (var _0x3a3e5d = 0x0; _0x3a3e5d < _0xaf6fb9[_0x1e26ab(0x105)]; _0x3a3e5d++) {
-            if (truthsonucsayi[_0xaf6fb9[_0x3a3e5d]] == 0x0)
+            // collect don't-care indices among the included minterms
+            if (truthsonucsayi[_0xaf6fb9[_0x3a3e5d]] == 0x2)
                 decimalsdcsiz['push'](_0xaf6fb9[_0x3a3e5d]);
         }
         var _0x555535 = [];
@@ -611,15 +613,16 @@ function kmapsolver(_0x292144) {
         for (var _0x49aeca = 0x0; _0x49aeca < _0x277617['length']; _0x49aeca++) {
             _0x11dae7 = '';
             for (var _0x4791eb = 0x0; _0x4791eb < _0x277617[_0x49aeca][_0x1e26ab(0x105)]; _0x4791eb++) {
+                // variable bit mapping: '1' means variable is asserted (no prime), '0' means negated
                 if (_0x277617[_0x49aeca][_0x4791eb] == '1') {
                     if (_0x11dae7[_0x1e26ab(0x105)] > 0x0)
-                        _0x11dae7 = _0x11dae7 + _0x1e26ab(0xc3);
-                    _0x11dae7 = _0x11dae7 + degiskenlistesi[_0x4791eb] + '\x27';
+                        _0x11dae7 = _0x11dae7 + '\x20+\x20';
+                    _0x11dae7 = _0x11dae7 + degiskenlistesi[_0x4791eb];
                 } else {
                     if (_0x277617[_0x49aeca][_0x4791eb] == '0') {
                         if (_0x11dae7[_0x1e26ab(0x105)] > 0x0)
-                            _0x11dae7 = _0x11dae7 + '\x20+\x20';
-                        _0x11dae7 = _0x11dae7 + degiskenlistesi[_0x4791eb];
+                            _0x11dae7 = _0x11dae7 + _0x1e26ab(0xc3);
+                        _0x11dae7 = _0x11dae7 + degiskenlistesi[_0x4791eb] + '\x27';
                     }
                 }
             }

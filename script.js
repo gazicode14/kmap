@@ -30,15 +30,18 @@ let perm = new Set(); ///permutation
 num.forEach(num=>{
     num.addEventListener('click',()=>{
         if(num.innerHTML=="1")num.innerHTML="0";
-        else if(num.innerHTML= "0")num.innerHTML="1";
+        else if(num.innerHTML== "0")num.innerHTML="1";
         solved = false;
          val=[];
          visited = new Set();
+         nvisited = new Set();
          colorInd = 0;
          const elements = document.querySelectorAll('#ch');
          elements.forEach(function(element) {
          element.parentNode.removeChild(element);
     });
+    // auto re-run solver after value change
+    butt.click();
     })
 });
 
@@ -51,6 +54,7 @@ Var2.addEventListener('click',()=>{
     solved=false;
     val = [];
     visited = new Set();
+    nvisited = new Set();
     outer.style.height  = "500px";
     outer.style.width = "500px";
     if(currVariable == 4)
@@ -139,6 +143,7 @@ Var.addEventListener('click',()=>{
          })
     val = [];
     visited = new Set();
+    nvisited = new Set();
     solved=false;
     if(currVariable == 2)
     {
@@ -191,6 +196,7 @@ Var4.addEventListener('click',()=>{
          })
     val = [];
     visited = new Set();
+    nvisited = new Set();
     solved= false;
     if(currVariable == 2)
     {
@@ -412,21 +418,21 @@ function solve(val)
                    allPossibletwos();
                    twoCol(1);
                    twoRow(1);
-                //   //console.log("after all posible",visited);
+                
                   twoUpDown();//doinggg.....
                   twoLeftRight(val.length);
                   onCell();           
         }
         if(currVariable == 3)
         {
-            rowWiseFour(val.length);
-            square();
-            forThreeLeftRight();
-            allPossibletwos();
+            rowWiseFour(1);          // Check horizontal groups of 4
+            square(1);               // Check 2x2 squares (groups of 4)
+            forThreeLeftRight();     // Check wrap-around groups of 4
+            allPossibletwos();       // THEN check groups of 2
             twoRow(1);
             twoCol(1);
             twoLeftRight(val.length);
-            onCell();
+            onCell();    
             
         }
         if(currVariable == 2)
@@ -2510,6 +2516,8 @@ function createBox()
             elements.forEach(function(element) {
             element.parentNode.removeChild(element);
          })
+            // auto re-run solver after value change
+            butt.click();
                 })
                 nl.appendChild(buttChild);
 
